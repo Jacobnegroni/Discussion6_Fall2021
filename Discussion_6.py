@@ -74,10 +74,17 @@ class FireReader():
         For example, 1.2
         """
 
-        pass
-
+        return sorted(self.data_dict['area'], reverse = True)[0]
 
     def most_fires_month(self):
+        count = {}
+        for i in self.data_dict['month']:
+            count[i] = count.get(i, 0) + 1
+        
+        top_month = sorted(count.items(),key=lambda x: x[1],reverse=True)[0][0]
+
+        return 'The month with the most fires was {}.'.format(top_month)
+
         """
         This method should iterate through the month column, keep count of
         how many fires occured in each month (HINT: use a dictionary), and
@@ -88,7 +95,6 @@ class FireReader():
         You should replace 'dec' with the correct month.
         """
 
-        pass
 
     def temp_of_largest(self):
         """
@@ -102,8 +108,9 @@ class FireReader():
         this is ok.
         """
 
-        pass
-
+        largest_area = self.largest_fire()
+        data_index = self.data_dict['area'].index(largest_area)
+        return self.data_dict['temp'][data_index]
 
 class TestFireReader(unittest.TestCase):
     """
